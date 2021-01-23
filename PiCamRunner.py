@@ -19,7 +19,8 @@ class PiCamRunner():
 
         raw_capture = picamera.array.PiRGBArray(camera, size=camera.resolution)
 
-        last_time = time.time()
+        # subtract period so that an image is taken as soon as started
+        last_time = time.time() - self.timelapse_period
 
         for frame in camera.capture_continuous(raw_capture, format="rgb", use_video_port=True):
 
