@@ -27,7 +27,7 @@ class Lapsnap():
         folder = self.get_day_folder(self.root_image_folder)
         name = os.path.join(folder, str(datetime.datetime.now()) + '.jpg')
         img_pil = Image.fromarray(image)
-        image.save(name)
+        img_pil.save(name)
 
     def timelapse_callback(self, image):
         self.save_image(image)
