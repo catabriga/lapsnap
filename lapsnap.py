@@ -5,6 +5,7 @@ import sys
 import argparse
 import signal
 import numpy as np
+from PIL import Image
 
 import PiCamRunner
 
@@ -25,6 +26,7 @@ class Lapsnap():
     def save_image(self, image):
         folder = self.get_day_folder(self.root_image_folder)
         name = os.path.join(folder, str(datetime.datetime.now()) + '.jpg')
+        img_pil = Image.fromarray(image)
         image.save(name)
 
     def timelapse_callback(self, image):
