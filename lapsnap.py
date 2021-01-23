@@ -56,7 +56,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--save_folder', default="./lapsnap_data/", help='path to save images')
     parser.add_argument('--period', default=60, help='period between saved images in seconds')
-    parser.add_argument('--size', nargs=2, default=[640,480], help='image resolution')
+    parser.add_argument('--size', nargs=2, default=[640,480], type=int, help='image resolution')
     parser.add_argument('--rotation', default=0, help='image rotation')
     parser.add_argument('--framerate', default=10, help='capture framerate')
     parser.add_argument('--web_port', default=3370, help='image viewing website port')
