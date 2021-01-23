@@ -19,7 +19,7 @@ class Lapsnap():
         self.framerate = framerate
         self.web_port = web_port
 
-        self.image_webserver = Lapsnap.Lapsnap(self.web_port)
+        self.image_webserver = LapsnapWebServer.LapsnapWebServer(self.web_port)
 
     def get_day_folder(self, root_folder):
         today = str(datetime.date.today())
