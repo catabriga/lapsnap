@@ -8,14 +8,18 @@ import numpy as np
 from PIL import Image
 
 import PiCamRunner
+import LapsnapWebServer
 
 class Lapsnap():
-    def __init__(self, root_image_folder, period, size, rotation, framerate):
+    def __init__(self, root_image_folder, period, size, rotation, framerate, web_port):
         self.root_image_folder = root_image_folder
         self.period = period
         self.size = tuple(size)
         self.rotation = rotation
         self.framerate = framerate
+        self.web_port = web_port
+
+        self.image_webserver = Lapsnap.Lapsnap(self.web_port)
 
     def get_day_folder(self, root_folder):
         today = str(datetime.date.today())
@@ -31,6 +35,7 @@ class Lapsnap():
 
     def timelapse_callback(self, image):
         self.save_image(image)
+        self.image_webserver.set_last_image(image)
 
     def run(self):
         picam_detector = PiCamRunner.PiCamRunner(timelapse_period=self.period,
@@ -53,10 +58,11 @@ if __name__ == "__main__":
     parser.add_argument('--size', nargs=2, default=[640,480], help='image resolution')
     parser.add_argument('--rotation', default=0, help='image rotation')
     parser.add_argument('--framerate', default=10, help='capture framerate')
+    parser.add_argument('--web_port', default=3370, help='image viewing website port')
     args = parser.parse_args()
 
     signal.signal(signal.SIGTERM, signal_handler)
 
     lapsnap = Lapsnap(root_image_folder=args.save_folder, period=args.period, size=args.size,
-                      rotation=args.rotation, framerate=args.framerate)
+                      rotation=args.rotation, framerate=args.framerate, web_port=args.web_port)
     lapsnap.run()
