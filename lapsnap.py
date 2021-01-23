@@ -44,6 +44,7 @@ class Lapsnap():
                                                  rotation=self.rotation,
                                                  framerate=self.framerate)
 
+        self.image_webserver.start_image_server()
         picam_detector.run()
 
 
