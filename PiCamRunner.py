@@ -24,7 +24,7 @@ class PiCamRunner():
             camera.contrast = 0
             camera.saturation = 0
             camera.brightness = 50
-            camera.annotate_foreground = picamera.Color(r=255, g=0, b=0)
+            camera.annotate_foreground = picamera.Color(r=0, g=0, b=0)
 
             raw_capture = picamera.array.PiRGBArray(camera, size=camera.resolution)
 
