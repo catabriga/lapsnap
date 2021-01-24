@@ -33,7 +33,7 @@ class PiCamRunner():
         if not os.path.isfile(file_path):
             self.write_default_config_file(file_path)
 
-        config_dict = []
+        config_dict = {}
         with open(file_path, 'r') as file:
             lines = file.readlines()
             for line in lines:
