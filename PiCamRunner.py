@@ -56,6 +56,12 @@ class PiCamRunner():
         return config_dict
 
 
+    def write_configuration(self, config_dict, file_path=DEFAULT_CONFIG_PATH):
+        with open(file_path, 'w') as file:
+            for key in config_dict:
+                file.write('%s = %s\n'%(key, str(config_dict[key]).strip('()')))
+
+
     def load_configuration(self, file_path=DEFAULT_CONFIG_PATH):
         config_dict = self.read_configuration(file_path)
         self.set_camera_config(config_dict)

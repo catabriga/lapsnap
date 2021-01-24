@@ -43,12 +43,16 @@ class LapsnapWebServer:
         return html_start + html_divs + html_end
 
     @cherrypy.expose
-    def save_config(self, resolution, rotation, shutter_speed, exposure_mode, iso, exposure_compensation, contrast, saturation, brightness):
+    def save_config(self, **kwargs):
+        self.picam_runner.write_configuration(config_dict=kwargs)
+        self.picam_runner.load_configuration()
         return 'configuration saved'
 
     @cherrypy.expose
-    def save_config(self, resolution, rotation, shutter_speed, exposure_mode, iso, exposure_compensation, contrast, saturation, brightness):
-        return 'configuration saved'
+    def reset_config(self):
+        self.picam_runner.write_default_config_file()
+        self.picam_runner.load_configuration()
+        return 'configuration reset'
 
     def run_image_server(self):
         cherrypy.config.update({'server.socket_host': '0.0.0.0'})
