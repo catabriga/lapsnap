@@ -34,13 +34,17 @@ class LapsnapWebServer:
         html_start = """<html><head></head><body>
             <a href="https://picamera.readthedocs.io/en/release-1.13/api_camera.html" target="_blank">camera api<a/>
             <form method="get" action="save_config">"""
-        html_end = """<button type="submit">save</button></form></body></html>"""
+        html_end = """<button type="submit">save</button></form><form method="get" action="reset_config"><button type="submit">reset to default</button></form></body></html>"""
 
         html_divs = ""
         for key in config_dict:
             html_divs += '<div><label for="%s">%s: </label><input type="text" value="%s" name="resolution" /></div>'%(key,key,config_dict[key])
 
         return html_start + html_divs + html_end
+
+    @cherrypy.expose
+    def save_config(self, resolution, rotation, shutter_speed, exposure_mode, iso, exposure_compensation, contrast, saturation, brightness):
+        return 'configuration saved'
 
     @cherrypy.expose
     def save_config(self, resolution, rotation, shutter_speed, exposure_mode, iso, exposure_compensation, contrast, saturation, brightness):
