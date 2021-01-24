@@ -39,18 +39,18 @@ class PiCamRunner():
             for line in lines:
                 values = line.split('=')
                 try:
-                    config_dict[values[0]] = int(values[1])
+                    config_dict[values[0].strip()] = int(values[1])
                     continue
                 except:
                     pass    
 
                 try:
-                    config_dict[values[0]] = (values[1].split(',')[0], values[1].split(',')[1])
+                    config_dict[values[0].strip()] = (int(values[1].split(',')[0]), int(values[1].split(',')[1]))
                     continue
                 except:
                     pass
 
-                config_dict[values[0]] = values[1]
+                config_dict[values[0].strip()] = values[1].strip()
 
         self.set_camera_config(config_dict)
 
