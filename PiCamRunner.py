@@ -16,7 +16,7 @@ class PiCamRunner():
         with picamera.PiCamera() as camera:
             camera.resolution = self.size
             camera.rotation = self.rotation
-            camera.framerate_range = (0.0333, 30)
+            camera.framerate_range = (0.0001, 30)
             camera.shutter_speed = 3000000
             camera.exposure_mode = 'night'
             camera.iso = 800
@@ -30,6 +30,8 @@ class PiCamRunner():
             last_time = time.time()
 
             while(True):
+                current_time = time.time()
+                
                 camera.annotate_text = str(datetime.datetime.now())
                 print('exposure_speed = %d shutter_speed = %d'%(camera.exposure_speed, camera.shutter_speed))
                 camera.capture(raw_capture, format='rgb', use_video_port=False)
@@ -38,7 +40,6 @@ class PiCamRunner():
                 self.timelapse_callback(image)
                 raw_capture.truncate(0)
 
-                current_time = time.time()
                 print('current_time = %d last_time = %d dt = %d'%(current_time, last_time, current_time-last_time))
                 sleep_time = max(self.timelapse_period - (current_time - last_time), 0)
                 last_time = current_time
