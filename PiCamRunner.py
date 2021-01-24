@@ -18,15 +18,15 @@ class PiCamRunner():
 
     def write_default_config_file(self, file_path=DEFAULT_CONFIG_PATH):
         with open(file_path, 'w') as file:
-            file.write('resolution = 1640,1232')
-            file.write('rotation = 0')
-            file.write('shutter_speed = 0')
-            file.write('exposure_mode = auto')
-            file.write('iso = 0')
-            file.write('exposure_compensation = 0')
-            file.write('contrast = 0')
-            file.write('saturation = 0')
-            file.write('brightness = 50')
+            file.write('resolution = 1640,1232\n')
+            file.write('rotation = 0\n')
+            file.write('shutter_speed = 0\n')
+            file.write('exposure_mode = auto\n')
+            file.write('iso = 0\n')
+            file.write('exposure_compensation = 0\n')
+            file.write('contrast = 0\n')
+            file.write('saturation = 0\n')
+            file.write('brightness = 50\n')
 
 
     def load_configuration(self, file_path=DEFAULT_CONFIG_PATH):
