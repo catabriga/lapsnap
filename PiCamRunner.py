@@ -41,6 +41,7 @@ class PiCamRunner():
                 raw_capture.truncate(0)
 
                 sleep_time = max(self.timelapse_period - (current_time - last_time), 0)
-                last_time = current_time
                 print('current_time = %d last_time = %d dt = %d sleep_time = %d'%(current_time, last_time, current_time-last_time, sleep_time))
                 time.sleep(sleep_time)
+                last_time = current_time
+                
