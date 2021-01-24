@@ -40,6 +40,6 @@ class PiCamRunner():
 
                 end_time = time.time()
                 sleep_time = max(self.timelapse_period - (end_time - start_time), 0)
-                print('current_time = %d sleep_time = %d'%(current_time, sleep_time))
+                print('sleep_time = %d'%(sleep_time))
                 time.sleep(sleep_time)
                 
