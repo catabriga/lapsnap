@@ -30,7 +30,7 @@ class PiCamRunner():
 
 
     def load_configuration(self, file_path=DEFAULT_CONFIG_PATH):
-        if not os.path.isfile(path):
+        if not os.path.isfile(file_path):
             self.write_default_config_file(file_path)
 
         config_dict = []
