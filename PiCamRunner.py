@@ -20,7 +20,7 @@ class PiCamRunner():
             camera.exposure_mode = 'night'
             camera.iso = 800
             camera.exposure_compensation = 25
-            camera.contrast = 0
+            camera.contrast = 50
             camera.saturation = 0
             camera.brightness = 50
 
