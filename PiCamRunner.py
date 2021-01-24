@@ -22,7 +22,7 @@ class PiCamRunner():
             camera.exposure_compensation = 12
             camera.contrast = 0
             camera.saturation = 0
-            camera.brightness = 50
+            camera.brightness = 75
 
             raw_capture = picamera.array.PiRGBArray(camera, size=camera.resolution)
 
