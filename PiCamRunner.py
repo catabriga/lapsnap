@@ -64,7 +64,7 @@ class PiCamRunner():
 
 
     def load_configuration(self):
-        config_dict = self.read_configuration(self.config_file_path)
+        config_dict = self.read_configuration()
         self.set_camera_config(config_dict)
 
 
