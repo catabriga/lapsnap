@@ -15,7 +15,7 @@ class PiCamRunner():
     def run(self):
         with picamera.PiCamera() as camera:
             camera.resolution = (1640, 1232)
-            camera.rotation = self.rotation
+            camera.rotation = 180
             camera.framerate_range = (0.0333, 30)
             camera.shutter_speed = 3000000
             camera.exposure_mode = 'night'
@@ -24,7 +24,7 @@ class PiCamRunner():
             camera.contrast = 0
             camera.saturation = 0
             camera.brightness = 50
-            camera.annotate_foreground = picamera.Color(r=1.0, g=0.0, b=0.0)
+            camera.annotate_foreground = picamera.Color(r=255, g=0, b=0)
 
             raw_capture = picamera.array.PiRGBArray(camera, size=camera.resolution)
 
