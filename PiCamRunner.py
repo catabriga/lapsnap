@@ -8,7 +8,8 @@ import os.path
 DEFAULT_CONFIG_PATH = './lapsnap_config.txt'
 
 class PiCamRunner():
-    def __init__(self, timelapse_callback):
+    def __init__(self, timelapse_period, timelapse_callback):
+        self.timelapse_period = timelapse_period
         self.timelapse_callback = timelapse_callback
         self.camera = picamera.PiCamera()
 

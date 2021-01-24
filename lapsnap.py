@@ -11,8 +11,9 @@ import PiCamRunner
 import LapsnapWebServer
 
 class Lapsnap():
-    def __init__(self, root_image_folder, web_port):
+    def __init__(self, root_image_folder, period, web_port):
         self.root_image_folder = root_image_folder
+        self.period = period
         self.web_port = web_port
 
         self.image_webserver = LapsnapWebServer.LapsnapWebServer(self.web_port)
@@ -34,7 +35,8 @@ class Lapsnap():
         self.image_webserver.set_last_image(image)
 
     def run(self):
-        picam_detector = PiCamRunner.PiCamRunner(timelapse_callback=self.timelapse_callback)
+        picam_detector = PiCamRunner.PiCamRunner(timelapse_period=self.period,
+                                                 timelapse_callback=self.timelapse_callback)
 
         self.image_webserver.start_image_server()
         picam_detector.run()
@@ -47,10 +49,11 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--save_folder', default="./lapsnap_data/", help='path to save images')
+    parser.add_argument('--period', default=60, help='period between saved images in seconds')
     parser.add_argument('--web_port', default=3370, help='image viewing website port')
     args = parser.parse_args()
 
     signal.signal(signal.SIGTERM, signal_handler)
 
-    lapsnap = Lapsnap(root_image_folder=args.save_folder, web_port=args.web_port)
+    lapsnap = Lapsnap(root_image_folder=args.save_folder, period=args.period, web_port=args.web_port)
     lapsnap.run()
