@@ -19,10 +19,10 @@ class PiCamRunner():
             camera.shutter_speed = 6000000
             camera.exposure_mode = 'night'
             camera.iso = 800
-            camera.exposure_compensation = 12
+            camera.exposure_compensation = 25
             camera.contrast = 0
             camera.saturation = 0
-            camera.brightness = 75
+            camera.brightness = 50
 
             raw_capture = picamera.array.PiRGBArray(camera, size=camera.resolution)
 
