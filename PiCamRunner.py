@@ -16,11 +16,11 @@ class PiCamRunner():
         with picamera.PiCamera() as camera:
             camera.resolution = self.size
             camera.rotation = self.rotation
-            camera.shutter_speed = 6000000
+            camera.shutter_speed = 20000000
             camera.exposure_mode = 'night'
             camera.iso = 800
             camera.exposure_compensation = 25
-            camera.contrast = -50
+            camera.contrast = 0
             camera.saturation = 0
             camera.brightness = 50
 
@@ -30,7 +30,8 @@ class PiCamRunner():
 
             while(True):
                 camera.annotate_text = str(datetime.datetime.now())
-                camera.capture(raw_capture, format="rgb", use_video_port=False)
+                camera.capture(raw_capture, format='rgb', use_video_port=False)
+                print('exposure_speed = %d'%(camera.exposure_speed))
                 image = raw_capture.array
                 self.timelapse_callback(image)
                 raw_capture.truncate(0)
