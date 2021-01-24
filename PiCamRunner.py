@@ -40,14 +40,13 @@ class PiCamRunner():
             camera.resolution = self.size
             camera.framerate = self.framerate
             camera.rotation = self.rotation
-            camera.annotate_text = str(datetime.datetime.now())
 
             raw_capture = picamera.array.PiRGBArray(camera, size=camera.resolution)
 
             last_time = time.time()
 
             while(True):
-                camera.annotate_text =
+                camera.annotate_text = str(datetime.datetime.now())
                 camera.capture(raw_capture, format="rgb", use_video_port=False)
                 image = frame.array
                 self.timelapse_callback(image)
