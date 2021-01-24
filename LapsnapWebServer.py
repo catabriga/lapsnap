@@ -25,19 +25,29 @@ class LapsnapWebServer:
 
     @cherrypy.expose
     def config(self):
-        return """<html>
-          <head></head>
-          <body>
-            <form method="get" action="generate">
-              <input type="text" value="8" name="length" />
-              <button type="submit">Give it now!</button>
+        return """
+    <html>
+        <head></head>
+        <body>
+            <form method="get" action="save_config">
+                <input type="text" value="1640,1232" name="resolution" />
+                <input type="text" value="0" name="rotation" />
+                <input type="text" value="0" name="shutter_speed" />
+                <input type="text" value="auto" name="exposure_mode" />
+                <input type="text" value="0" name="iso" />
+                <input type="text" value="0" name="exposure_compensation" />
+                <input type="text" value="0" name="contrast" />
+                <input type="text" value="0" name="saturation" />
+                <input type="text" value="50" name="brightness" />
+                <button type="submit">save</button>
             </form>
-          </body>
-        </html>"""
+        </body>
+    </html>
+    """
 
     @cherrypy.expose
-    def generate(self, length=8):
-        return ''.join(random.sample(string.hexdigits, int(length)))
+    def save_config(self, resolution, rotation, shutter_speed, exposure_mode, iso, exposure_compensation, contrast, saturation. brightness):
+        return 'configuration saved'
 
     def run_image_server(self):
         cherrypy.config.update({'server.socket_host': '0.0.0.0'})
