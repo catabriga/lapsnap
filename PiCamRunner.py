@@ -21,6 +21,7 @@ class PiCamRunner():
             camera.exposure_mode = 'night'
             camera.iso = 800
             camera.exposure_compensation = 2
+            camera.contrast = 50
 
             raw_capture = picamera.array.PiRGBArray(camera, size=camera.resolution)
 
