@@ -19,6 +19,7 @@ class PiCamRunner():
             camera.rotation = self.rotation
             camera.shutter_speed = 3000000
             camera.exposure_mode = 'night'
+            camera.iso = 800
 
             raw_capture = picamera.array.PiRGBArray(camera, size=camera.resolution)
 
