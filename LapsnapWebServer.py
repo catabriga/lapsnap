@@ -1,10 +1,12 @@
 from PIL import Image
 import numpy
-import random
 from io import BytesIO
 import threading
 import time
 import cherrypy
+
+import random
+import string
 
 class LapsnapWebServer:
     def __init__(self, port):
