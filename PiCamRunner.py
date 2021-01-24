@@ -16,7 +16,7 @@ class PiCamRunner():
         with picamera.PiCamera() as camera:
             camera.resolution = self.size
             camera.rotation = self.rotation
-            camera.framerate_range = (0.001, 30)
+            camera.framerate_range = (0.0333, 30)
             camera.shutter_speed = 3000000
             camera.exposure_mode = 'night'
             camera.iso = 800
@@ -31,7 +31,7 @@ class PiCamRunner():
 
             while(True):
                 current_time = time.time()
-
+                
                 camera.annotate_text = str(datetime.datetime.now())
                 print('exposure_speed = %d shutter_speed = %d'%(camera.exposure_speed, camera.shutter_speed))
                 camera.capture(raw_capture, format='rgb', use_video_port=False)
