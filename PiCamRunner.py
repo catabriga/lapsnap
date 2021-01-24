@@ -8,17 +8,18 @@ import os.path
 DEFAULT_CONFIG_PATH = './lapsnap_config.txt'
 
 class PiCamRunner():
-    def __init__(self, timelapse_period, timelapse_callback):
+    def __init__(self, timelapse_period, timelapse_callback, config_file_path=DEFAULT_CONFIG_PATH):
         self.timelapse_period = timelapse_period
         self.timelapse_callback = timelapse_callback
         self.camera = picamera.PiCamera()
+        self.config_file_path = config_file_path
 
     def __del__(self):
         self.camera.close()
 
 
-    def write_default_config_file(self, file_path=DEFAULT_CONFIG_PATH):
-        with open(file_path, 'w') as file:
+    def write_default_config_file(self):
+        with open(self.config_file_path, 'w') as file:
             file.write('resolution = 1640,1232\n')
             file.write('rotation = 0\n')
             file.write('shutter_speed = 0\n')
@@ -30,12 +31,12 @@ class PiCamRunner():
             file.write('brightness = 50\n')
 
 
-    def read_configuration(self, file_path=DEFAULT_CONFIG_PATH):
-        if not os.path.isfile(file_path):
-            self.write_default_config_file(file_path)
+    def read_configuration(self):
+        if not os.path.isfile(self.config_file_path):
+            self.write_default_config_file()
 
         config_dict = {}
-        with open(file_path, 'r') as file:
+        with open(self.config_file_path, 'r') as file:
             lines = file.readlines()
             for line in lines:
                 values = line.split('=')
@@ -56,14 +57,14 @@ class PiCamRunner():
         return config_dict
 
 
-    def write_configuration(self, config_dict, file_path=DEFAULT_CONFIG_PATH):
-        with open(file_path, 'w') as file:
+    def write_configuration(self, config_dict):
+        with open(self.config_file_path, 'w') as file:
             for key in config_dict:
                 file.write('%s = %s\n'%(key, str(config_dict[key]).strip('()')))
 
 
-    def load_configuration(self, file_path=DEFAULT_CONFIG_PATH):
-        config_dict = self.read_configuration(file_path)
+    def load_configuration(self):
+        config_dict = self.read_configuration(self.config_file_path)
         self.set_camera_config(config_dict)
 
 
