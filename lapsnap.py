@@ -11,12 +11,8 @@ import PiCamRunner
 import LapsnapWebServer
 
 class Lapsnap():
-    def __init__(self, root_image_folder, period, size, rotation, framerate, web_port):
+    def __init__(self, root_image_folder, web_port):
         self.root_image_folder = root_image_folder
-        self.period = period
-        self.size = tuple(size)
-        self.rotation = rotation
-        self.framerate = framerate
         self.web_port = web_port
 
         self.image_webserver = LapsnapWebServer.LapsnapWebServer(self.web_port)
@@ -38,11 +34,7 @@ class Lapsnap():
         self.image_webserver.set_last_image(image)
 
     def run(self):
-        picam_detector = PiCamRunner.PiCamRunner(timelapse_period=self.period,
-                                                 timelapse_callback=self.timelapse_callback,
-                                                 size=self.size,
-                                                 rotation=self.rotation,
-                                                 framerate=self.framerate)
+        picam_detector = PiCamRunner.PiCamRunner(timelapse_callback=self.timelapse_callback)
 
         self.image_webserver.start_image_server()
         picam_detector.run()
@@ -55,15 +47,10 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--save_folder', default="./lapsnap_data/", help='path to save images')
-    parser.add_argument('--period', default=60, help='period between saved images in seconds')
-    parser.add_argument('--size', nargs=2, default=[640,480], type=int, help='image resolution')
-    parser.add_argument('--rotation', default=0, help='image rotation')
-    parser.add_argument('--framerate', default=10, help='capture framerate')
     parser.add_argument('--web_port', default=3370, help='image viewing website port')
     args = parser.parse_args()
 
     signal.signal(signal.SIGTERM, signal_handler)
 
-    lapsnap = Lapsnap(root_image_folder=args.save_folder, period=args.period, size=args.size,
-                      rotation=args.rotation, framerate=args.framerate, web_port=args.web_port)
+    lapsnap = Lapsnap(root_image_folder=args.save_folder, web_port=args.web_port)
     lapsnap.run()
