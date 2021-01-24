@@ -38,6 +38,7 @@ class Lapsnap():
         picam_runner = PiCamRunner.PiCamRunner(timelapse_period=self.period,
                                                  timelapse_callback=self.timelapse_callback)
 
+        self.image_webserver.set_picam_runner(picam_runner)
         self.image_webserver.start_image_server()
         picam_runner.run()
 
