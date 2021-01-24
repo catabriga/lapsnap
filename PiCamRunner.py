@@ -27,10 +27,8 @@ class PiCamRunner():
 
             raw_capture = picamera.array.PiRGBArray(camera, size=camera.resolution)
 
-            last_time = time.time()
-
             while(True):
-                current_time = time.time()
+                start_time = time.time()
 
                 camera.annotate_text = str(datetime.datetime.now())
                 print('exposure_speed = %d shutter_speed = %d'%(camera.exposure_speed, camera.shutter_speed))
@@ -40,8 +38,8 @@ class PiCamRunner():
                 self.timelapse_callback(image)
                 raw_capture.truncate(0)
 
-                sleep_time = max(self.timelapse_period - (current_time - last_time), 0)
-                print('current_time = %d last_time = %d dt = %d sleep_time = %d'%(current_time, last_time, current_time-last_time, sleep_time))
+                end_time = time.time()
+                sleep_time = max(self.timelapse_period - (end_time - start_time), 0)
+                print('current_time = %d sleep_time = %d'%(current_time, sleep_time))
                 time.sleep(sleep_time)
-                last_time = current_time
                 
