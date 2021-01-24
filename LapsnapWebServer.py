@@ -38,7 +38,7 @@ class LapsnapWebServer:
 
         html_divs = ""
         for key in config_dict:
-            html_divs += '<div><label for="%s">%s: </label><input type="text" value="%s" name="resolution" /></div>'%(key,key,config_dict[key])
+            html_divs += '<div><label for="%s">%s: </label><input type="text" value="%s" name="%s" /></div>'%(key,key,config_dict[key],key)
 
         return html_start + html_divs + html_end
 
