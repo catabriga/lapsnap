@@ -36,7 +36,7 @@ class PiCamRunner():
     #         raw_capture.truncate(0)
 
     def run(self):
-        with PiCamera() as camera:
+        with picamera.PiCamera() as camera:
             camera.resolution = self.size
             camera.framerate = self.framerate
             camera.rotation = self.rotation
