@@ -44,6 +44,7 @@ class LapsnapWebServer:
 
     @cherrypy.expose
     def save_config(self, **kwargs):
+        print(kwargs)
         self.picam_runner.write_configuration(config_dict=kwargs)
         self.picam_runner.load_configuration()
         return 'configuration saved'
