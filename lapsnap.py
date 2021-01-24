@@ -59,5 +59,5 @@ if __name__ == "__main__":
 
     signal.signal(signal.SIGTERM, signal_handler)
 
-    lapsnap = Lapsnap(root_image_folder=args.save_folder, period=args.period, web_port=args.web_port, image_config_file_path=)
+    lapsnap = Lapsnap(root_image_folder=args.save_folder, period=args.period, web_port=args.web_port, image_config_file_path=args.camera_config)
     lapsnap.run()
