@@ -46,7 +46,7 @@ class LapsnapWebServer:
     """
 
     @cherrypy.expose
-    def save_config(self, resolution, rotation, shutter_speed, exposure_mode, iso, exposure_compensation, contrast, saturation. brightness):
+    def save_config(self, resolution, rotation, shutter_speed, exposure_mode, iso, exposure_compensation, contrast, saturation, brightness):
         return 'configuration saved'
 
     def run_image_server(self):
