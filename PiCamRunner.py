@@ -3,6 +3,7 @@ import picamera.array
 import time
 import datetime
 import os
+import os.path
 
 DEFAULT_CONFIG_PATH = './lapsnap_config.txt'
 
