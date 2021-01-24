@@ -29,17 +29,53 @@ class LapsnapWebServer:
     <html>
         <head></head>
         <body>
+            <a href="https://picamera.readthedocs.io/en/release-1.13/api_camera.html" target="_blank">camera api<a/>
+
             <form method="get" action="save_config">
-                <span>resolution<span/>
-                <input type="text" value="1640,1232" name="resolution" />
-                <input type="text" value="0" name="rotation" />
-                <input type="text" value="0" name="shutter_speed" />
-                <input type="text" value="auto" name="exposure_mode" />
-                <input type="text" value="0" name="iso" />
-                <input type="text" value="0" name="exposure_compensation" />
-                <input type="text" value="0" name="contrast" />
-                <input type="text" value="0" name="saturation" />
-                <input type="text" value="50" name="brightness" />
+                <div>
+                  <label for="resolution">resolution: </label>
+                  <input type="text" value="1640,1232" name="resolution" />
+                </div>
+
+                <div>
+                  <label for="rotation">rotation: </label>
+                  <input type="text" value="0" name="rotation" />
+                </div>
+
+                <div>
+                  <label for="shutter_speed">shutter_speed: </label>
+                  <input type="text" value="0" name="shutter_speed" />
+                </div>
+
+                <div>
+                  <label for="exposure_mode">exposure_mode: </label>
+                  <input type="text" value="auto" name="exposure_mode" />
+                </div>
+
+                <div>
+                  <label for="iso">iso: </label>
+                  <input type="text" value="0" name="iso" />
+                </div>
+
+                <div>
+                  <label for="exposure_compensation">exposure_compensation: </label>
+                  <input type="text" value="0" name="exposure_compensation" />
+                </div>
+
+                <div>
+                  <label for="contrast">contrast: </label>
+                  <input type="text" value="0" name="contrast" />
+                </div>
+
+                <div>
+                  <label for="saturation">saturation: </label>
+                  <input type="text" value="0" name="saturation" />
+                </div>
+
+                <div>
+                  <label for="brightness">brightness: </label>
+                  <input type="text" value="50" name="brightness" />
+                </div>
                 <button type="submit">save</button>
             </form>
         </body>
