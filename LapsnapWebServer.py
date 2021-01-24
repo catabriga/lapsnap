@@ -20,6 +20,22 @@ class LapsnapWebServer:
         img_pil.save(mem_file, format='jpeg')
         return mem_file.getvalue()
 
+    @cherrypy.expose
+    def config(self):
+        return """<html>
+          <head></head>
+          <body>
+            <form method="get" action="generate">
+              <input type="text" value="8" name="length" />
+              <button type="submit">Give it now!</button>
+            </form>
+          </body>
+        </html>"""
+
+    @cherrypy.expose
+    def generate(self, length=8):
+        return ''.join(random.sample(string.hexdigits, int(length)))
+
     def run_image_server(self):
         cherrypy.config.update({'server.socket_host': '0.0.0.0'})
         cherrypy.config.update({'server.socket_port': self.port})
