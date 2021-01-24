@@ -48,7 +48,7 @@ class PiCamRunner():
             while(True):
                 camera.annotate_text = str(datetime.datetime.now())
                 camera.capture(raw_capture, format="rgb", use_video_port=False)
-                image = frame.array
+                image = raw_capture.array
                 self.timelapse_callback(image)
                 raw_capture.truncate(0)
 
