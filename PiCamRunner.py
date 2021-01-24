@@ -12,34 +12,13 @@ class PiCamRunner():
         self.rotation = rotation
 
 
-    # def run(self):
-    #     camera = picamera.PiCamera()
-    #     camera.resolution = self.size
-    #     camera.framerate = self.framerate
-    #     camera.rotation = self.rotation
-
-    #     raw_capture = picamera.array.PiRGBArray(camera, size=camera.resolution)
-
-    #     # subtract period so that an image is taken as soon as started
-    #     last_time = time.time() - self.timelapse_period
-
-    #     for frame in camera.capture_continuous(raw_capture, format="rgb", use_video_port=True):
-
-    #         current_time = time.time()
-
-    #         image = frame.array
-
-    #         if(current_time - last_time > self.timelapse_period):
-    #             self.timelapse_callback(image)
-    #             last_time = current_time
-
-    #         raw_capture.truncate(0)
-
     def run(self):
         with picamera.PiCamera() as camera:
             camera.resolution = self.size
             camera.framerate = self.framerate
             camera.rotation = self.rotation
+            camera.shutter_speed = 3000000
+            camera.exposure_mode = 'night'
 
             raw_capture = picamera.array.PiRGBArray(camera, size=camera.resolution)
 
