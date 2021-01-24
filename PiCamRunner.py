@@ -15,7 +15,6 @@ class PiCamRunner():
     def run(self):
         with picamera.PiCamera() as camera:
             camera.resolution = self.size
-            camera.framerate = self.framerate
             camera.rotation = self.rotation
             camera.shutter_speed = 6000000
             camera.exposure_mode = 'night'
