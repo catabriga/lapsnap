@@ -35,11 +35,11 @@ class Lapsnap():
         self.image_webserver.set_last_image(image)
 
     def run(self):
-        picam_detector = PiCamRunner.PiCamRunner(timelapse_period=self.period,
+        picam_runner = PiCamRunner.PiCamRunner(timelapse_period=self.period,
                                                  timelapse_callback=self.timelapse_callback)
 
         self.image_webserver.start_image_server()
-        picam_detector.run()
+        picam_runner.run()
 
 
 def signal_handler():

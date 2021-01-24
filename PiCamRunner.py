@@ -30,7 +30,7 @@ class PiCamRunner():
             file.write('brightness = 50\n')
 
 
-    def load_configuration(self, file_path=DEFAULT_CONFIG_PATH):
+    def read_configuration(self, file_path=DEFAULT_CONFIG_PATH):
         if not os.path.isfile(file_path):
             self.write_default_config_file(file_path)
 
@@ -53,6 +53,11 @@ class PiCamRunner():
 
                 config_dict[values[0].strip()] = values[1].strip()
 
+        return config_dict
+
+
+    def load_configuration(self, file_path=DEFAULT_CONFIG_PATH):
+        config_dict = self.read_configuration(file_path)
         self.set_camera_config(config_dict)
 
 

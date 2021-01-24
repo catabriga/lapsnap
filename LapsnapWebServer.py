@@ -13,6 +13,10 @@ class LapsnapWebServer:
         self.last_image = None
         self.port = port
         self.last_request_time = time.time()
+        self.picam_runner = None
+
+    def set_picam_runner(self, picam_runner):
+        self.picam_runner = picam_runner        
 
     @cherrypy.expose
     def lastimage(self):
@@ -25,62 +29,18 @@ class LapsnapWebServer:
 
     @cherrypy.expose
     def config(self):
-        return """
-    <html>
-        <head></head>
-        <body>
+        config_dict = self.picam_runner.read_configuration()
+
+        html_start = """<html><head></head><body>
             <a href="https://picamera.readthedocs.io/en/release-1.13/api_camera.html" target="_blank">camera api<a/>
+            <form method="get" action="save_config">"""
+        html_end = """<button type="submit">save</button></form></body></html>"""
 
-            <form method="get" action="save_config">
-                <div>
-                  <label for="resolution">resolution: </label>
-                  <input type="text" value="1640,1232" name="resolution" />
-                </div>
+        html_divs = ""
+        for key in config_dict:
+            html_divs += '<div><label for="%s">%s: </label><input type="text" value="%s" name="resolution" /></div>'%(key,key,config_dict[key])
 
-                <div>
-                  <label for="rotation">rotation: </label>
-                  <input type="text" value="0" name="rotation" />
-                </div>
-
-                <div>
-                  <label for="shutter_speed">shutter_speed: </label>
-                  <input type="text" value="0" name="shutter_speed" />
-                </div>
-
-                <div>
-                  <label for="exposure_mode">exposure_mode: </label>
-                  <input type="text" value="auto" name="exposure_mode" />
-                </div>
-
-                <div>
-                  <label for="iso">iso: </label>
-                  <input type="text" value="0" name="iso" />
-                </div>
-
-                <div>
-                  <label for="exposure_compensation">exposure_compensation: </label>
-                  <input type="text" value="0" name="exposure_compensation" />
-                </div>
-
-                <div>
-                  <label for="contrast">contrast: </label>
-                  <input type="text" value="0" name="contrast" />
-                </div>
-
-                <div>
-                  <label for="saturation">saturation: </label>
-                  <input type="text" value="0" name="saturation" />
-                </div>
-
-                <div>
-                  <label for="brightness">brightness: </label>
-                  <input type="text" value="50" name="brightness" />
-                </div>
-                <button type="submit">save</button>
-            </form>
-        </body>
-    </html>
-    """
+        return html_start + html_divs + html_end
 
     @cherrypy.expose
     def save_config(self, resolution, rotation, shutter_speed, exposure_mode, iso, exposure_compensation, contrast, saturation, brightness):
