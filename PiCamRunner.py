@@ -30,6 +30,7 @@ class PiCamRunner():
 
             while(True):
                 camera.annotate_text = str(datetime.datetime.now())
+                print('exposure_speed = %d shutter_speed = %d'%(camera.exposure_speed, camera.shutter_speed))
                 camera.capture(raw_capture, format='rgb', use_video_port=False)
                 print('exposure_speed = %d shutter_speed = %d'%(camera.exposure_speed, camera.shutter_speed))
                 image = raw_capture.array
