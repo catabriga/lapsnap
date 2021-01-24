@@ -30,6 +30,7 @@ class LapsnapWebServer:
         <head></head>
         <body>
             <form method="get" action="save_config">
+                <span>resolution<span/>
                 <input type="text" value="1640,1232" name="resolution" />
                 <input type="text" value="0" name="rotation" />
                 <input type="text" value="0" name="shutter_speed" />
